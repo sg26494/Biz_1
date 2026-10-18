@@ -1,0 +1,41 @@
+# Production on one VM (2-4 GB). Postgres is managed (RDS Mumbai), so it is not here.
+# Images come from GHCR; IMAGE_TAG is set by the deploy job (keep the previous tag for rollback).
+services:
+  caddy:
+    image: caddy:2.8-alpine
+    restart: unless-stopped
+    ports: ["80:80", "443:443"]
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+    depends_on: [api, web]
+
+  api:
+    image: ghcr.io/${GH_OWNER}/store-api:${IMAGE_TAG}
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      FRONTEND_REVALIDATE_URL: http://web:3000/api/revalidate
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:8080/health || exit 1"]
+      interval: 15s
+      retries: 5
+
+  worker:
+    image: ghcr.io/${GH_OWNER}/store-api:${IMAGE_TAG}
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      SPRING_PROFILES_ACTIVE: prod,worker
+      FRONTEND_REVALIDATE_URL: http://web:3000/api/revalidate
+
+  web:
+    image: ghcr.io/${GH_OWNER}/store-web:${IMAGE_TAG}
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      API_INTERNAL_URL: http://api:8080
+
+volumes:
+  caddy_data:
