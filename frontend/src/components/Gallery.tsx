@@ -7,12 +7,12 @@ import type { ImageView } from '@/lib/types';
 export function Gallery({ images, title }: { images: ImageView[]; title: string }) {
   const [i, setI] = useState(0);
   if (images.length === 0) {
-    return <div className="flex aspect-[4/5] items-center justify-center rounded-lg bg-sand-100 text-sand-400">No photo yet</div>;
+    return <div className="gm-print-a aspect-[4/5] rounded-b-lg rounded-t-[220px]" />;
   }
   const img = images[Math.min(i, images.length - 1)];
   return (
     <div>
-      <div className="relative aspect-[4/5] overflow-hidden rounded-lg bg-sand-100">
+      <div className="gm-print-a relative aspect-[4/5] overflow-hidden rounded-b-lg rounded-t-[220px]">
         <Image src={img.url} alt={img.alt || title} fill priority sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
       </div>
       {images.length > 1 && (

@@ -48,6 +48,7 @@ public class SecurityConfig {
                                 API + "/search", API + "/delivery/**", API + "/pages/**", API + "/banners",
                                 API + "/meta/**").permitAll()
                         .requestMatchers(API + "/cart/**", API + "/cart").permitAll()
+                        .requestMatchers(HttpMethod.POST, API + "/newsletter").permitAll()
                         .requestMatchers(API + "/checkout", API + "/orders/**", API + "/orders", API + "/payments/**",
                                 API + "/me/**", API + "/me").authenticated()
                         .anyRequest().denyAll())

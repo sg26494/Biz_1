@@ -66,9 +66,9 @@ export default async function ProductPage({ params }: Props) {
           </div>
           <div className="mt-8 space-y-4 text-sm leading-relaxed">
             <p className="whitespace-pre-line">{p.description}</p>
-            {Object.keys(p.attributes || {}).length > 0 && (
+            {Object.keys(p.attributes || {}).filter((k) => k !== 'badge').length > 0 && (
               <dl className="grid grid-cols-[auto,1fr] gap-x-6 gap-y-1">
-                {Object.entries(p.attributes).map(([k, v]) => (
+                {Object.entries(p.attributes).filter(([k]) => k !== 'badge').map(([k, v]) => (
                   <div key={k} className="contents">
                     <dt className="capitalize text-sand-600">{k.replace(/_/g, ' ')}</dt>
                     <dd>{String(v)}</dd>

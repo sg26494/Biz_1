@@ -7,18 +7,18 @@ export function ProductCard({ p }: { p: Card }) {
   const off = discountPercent(p.mrpPaise, p.pricePaise);
   return (
     <Link href={`/products/${p.slug}`} className="group block">
-      <div className="relative aspect-[4/5] overflow-hidden rounded-lg bg-sand-100">
+      <div className="gm-print-a relative aspect-[4/5] overflow-hidden rounded-b-lg rounded-t-[150px]">
         {p.imageUrl ? (
           <Image src={p.imageUrl} alt={p.imageAlt || p.title} fill sizes="(max-width: 640px) 50vw, 25vw"
             className="object-cover transition duration-300 group-hover:scale-[1.03]" />
         ) : (
-          <div className="flex h-full items-center justify-center text-xs text-sand-400">No photo yet</div>
+          <div className="h-full" />
         )}
         {!p.inStock && (
-          <span className="badge absolute left-2 top-2 bg-white/90 text-sand-800">Sold out</span>
+          <span className="absolute bottom-3 left-3 bg-sand-50 px-3 py-1 text-[10px] uppercase tracking-widest text-clay-600">Sold out</span>
         )}
       </div>
-      <h3 className="mt-2 line-clamp-2 font-sans text-sm text-sand-800">{p.title}</h3>
+      <h3 className="mt-3 line-clamp-2 text-lg text-indigo-900">{p.title}</h3>
       <p className="mt-1 text-sm">
         <span className="font-semibold text-indigo-900">{money(p.pricePaise)}</span>
         {off > 0 && (

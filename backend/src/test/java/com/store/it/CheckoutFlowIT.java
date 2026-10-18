@@ -190,7 +190,7 @@ class CheckoutFlowIT {
 
     private long createVariant(long pricePaise, int stock) {
         int n = SEQ.incrementAndGet();
-        long categoryId = jdbc.sql("SELECT id FROM categories WHERE slug = 'jaipuri-razai'").query(Long.class).single();
+        long categoryId = jdbc.sql("SELECT id FROM categories WHERE slug = 'jaipuri-rajai'").query(Long.class).single();
         long productId = jdbc.sql("""
                 INSERT INTO products (category_id, title, slug, status, hsn_code, gst_rate_bp)
                 VALUES (:c, :t, :s, 'ACTIVE', '6304', 500) RETURNING id

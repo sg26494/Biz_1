@@ -41,7 +41,7 @@ export const ORDER_STATUS_LABEL: Record<string, string> = {
   RTO: 'Returned to us',
 };
 
-export const SITE_NAME = process.env.NEXT_PUBLIC_SITE_NAME || 'Your Store';
+export const SITE_NAME = process.env.NEXT_PUBLIC_SITE_NAME || 'Gulmohar Fabrics';
 export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
 
 export const INDIAN_STATES = [

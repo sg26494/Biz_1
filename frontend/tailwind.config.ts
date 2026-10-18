@@ -5,14 +5,15 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Warm block-print palette: terracotta, indigo, sand.
-        clay: { 50: '#fbf5f0', 100: '#f4e4d6', 300: '#d9a27c', 500: '#b5653b', 600: '#9a5230', 700: '#7c4127' },
-        indigo: { 50: '#eef0f7', 500: '#33427a', 700: '#222c55', 900: '#151b36' },
-        sand: { 50: '#fbfaf7', 100: '#f4f0e8', 200: '#e8e1d4', 400: '#b8ad9a', 600: '#7a705f', 800: '#3b352c' },
+        // Gulmohar "Pink City" palette (same values as :root in src/app/gulmohar.css).
+        clay: { 50: '#FBF1EE', 100: '#F0E3DF', 300: '#E0A596', 500: '#CD7362', 600: '#A9564A', 700: '#8E463C' },
+        indigo: { 50: '#F0E3DF', 500: '#6B5B56', 700: '#3A2A26', 900: '#3A2A26' },
+        sand: { 50: '#FDF8F5', 100: '#F0E3DF', 200: '#E9D3CC', 400: '#B9A8A2', 600: '#6B5B56', 800: '#3A2A26' },
       },
       fontFamily: {
-        display: ['var(--font-display)', 'Georgia', 'serif'],
-        sans: ['var(--font-sans)', 'system-ui', 'sans-serif'],
+        display: ['"Playfair Display"', 'Georgia', 'serif'],
+        hindi: ['"Tiro Devanagari Hindi"', 'serif'],
+        sans: ['Montserrat', 'system-ui', 'sans-serif'],
       },
     },
   },

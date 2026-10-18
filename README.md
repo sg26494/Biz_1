@@ -89,6 +89,16 @@ cd frontend && npm run typecheck && npm run build
 | Cleanup | daily |
 | Low-stock email | daily |
 
+## Editing the homepage (Gulmohar design)
+
+- **Text and sections:** `frontend/src/app/(shop)/page.tsx`. Each section is marked `SECTION:`.
+- **Colours:** the `:root` block in `frontend/src/app/gulmohar.css`. The same colours are mirrored in `frontend/tailwind.config.ts`.
+- **Logo and photos:** `frontend/public/images/`. The hero arch shows `images/govind-dev-ji.jpg` once you add that file; until then it shows a rajai photo.
+- **Products in "Heritage Collection":** these come from Admin → Products. The tag on a card ("Bestseller", "New") is the product detail `badge`.
+- **Testimonials:** hidden until you add real reviews to the `REVIEWS` list in `page.tsx`.
+- **Newsletter:** sign-ups are saved in the `newsletter_subscribers` table.
+- **Starting catalog:** the 6 products, the PINKCITY10 coupon and the ₹2,999 free-shipping rule are loaded by `V6__gulmohar_catalog.sql`, with 10 units of test stock each.
+
 ## Deploying
 
 1. Create the managed Postgres (Mumbai) and one VM with Docker. Put `deploy/` and a filled `.env` on the VM in `~/store/deploy`, and set `SITE_DOMAIN` in that `.env`.
