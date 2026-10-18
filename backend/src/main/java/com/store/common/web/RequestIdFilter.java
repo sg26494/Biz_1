@@ -15,7 +15,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 /** Puts requestId and client IP in the MDC so every log line and audit row carries them. */
 @Component
 @Order(Ordered.HIGHEST_PRECEDENCE)
-public class RequestContextFilter extends OncePerRequestFilter {
+public class RequestIdFilter extends OncePerRequestFilter {
 
     public static final String REQUEST_ID = "requestId";
     public static final String CLIENT_IP = "clientIp";

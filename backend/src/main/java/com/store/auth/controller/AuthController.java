@@ -10,7 +10,7 @@ import com.store.auth.service.AuthService;
 import com.store.auth.service.AuthService.ClientInfo;
 import com.store.cart.controller.CartController;
 import com.store.common.config.AppProperties;
-import com.store.common.web.RequestContextFilter;
+import com.store.common.web.RequestIdFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import java.time.Duration;
@@ -103,6 +103,6 @@ public class AuthController {
                 }
             }
         }
-        return new ClientInfo(RequestContextFilter.clientIp(http), http.getHeader(HttpHeaders.USER_AGENT), sid);
+        return new ClientInfo(RequestIdFilter.clientIp(http), http.getHeader(HttpHeaders.USER_AGENT), sid);
     }
 }

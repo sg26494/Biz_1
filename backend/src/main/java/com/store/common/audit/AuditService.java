@@ -1,7 +1,7 @@
 package com.store.common.audit;
 
 import com.store.common.util.Json;
-import com.store.common.web.RequestContextFilter;
+import com.store.common.web.RequestIdFilter;
 import java.time.OffsetDateTime;
 import java.util.List;
 import org.springframework.jdbc.core.simple.JdbcClient;
@@ -36,8 +36,8 @@ public class AuditService {
                 .param("before", json.write(before))
                 .param("after", json.write(after))
                 .param("reason", reason)
-                .param("ip", RequestContextFilter.currentIp())
-                .param("rid", RequestContextFilter.currentRequestId())
+                .param("ip", RequestIdFilter.currentIp())
+                .param("rid", RequestIdFilter.currentRequestId())
                 .update();
     }
 
