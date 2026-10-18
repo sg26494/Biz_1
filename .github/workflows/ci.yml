@@ -38,9 +38,11 @@ jobs:
           import sys, xml.etree.ElementTree as ET
           for tc in ET.parse(sys.argv[1]).getroot().iter('testcase'):
               for fl in list(tc.findall('failure')) + list(tc.findall('error')):
-                  msg = (fl.get('message') or '')[:300].replace('\n', ' ')
-                  body = ' | '.join((fl.text or '').splitlines()[:12])[:1500]
-                  print(f"::error title={tc.get('classname')}.{tc.get('name')}::{msg} || {body}")
+                  lines = (fl.text or '').splitlines()
+                  causes = [l.strip() for l in lines if l.strip().startswith('Caused by')]
+                  head = (fl.get('message') or '')[:200].replace('\n', ' ')
+                  detail = ' || '.join(c[:600] for c in causes[-3:]) or ' | '.join(lines[:8])[:1500]
+                  print(f"::error title={tc.get('name')}::{head} >>> {detail}")
           PY
           done
       - if: always()
