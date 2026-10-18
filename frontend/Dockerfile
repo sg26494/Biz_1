@@ -7,6 +7,7 @@ FROM node:22-alpine AS build
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
+ARG API_INTERNAL_URL=http://api:8080
 ARG NEXT_PUBLIC_SITE_URL
 ARG NEXT_PUBLIC_SITE_NAME
 ARG NEXT_PUBLIC_GOOGLE_CLIENT_ID
