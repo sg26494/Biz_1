@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <springProfile name="local,test">
+        <include resource="org/springframework/boot/logging/logback/base.xml"/>
+    </springProfile>
+    <springProfile name="!local &amp; !test">
+        <!-- Structured JSON logs; MDC carries requestId, userId and orderNumber -->
+        <appender name="JSON" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder class="net.logstash.logback.encoder.LogstashEncoder"/>
+        </appender>
+        <root level="INFO">
+            <appender-ref ref="JSON"/>
+        </root>
+    </springProfile>
+</configuration>

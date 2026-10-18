@@ -1,0 +1,21 @@
+# Cloudflare sits in front (DNS, CDN, WAF). Use "Full (strict)" SSL; Caddy gets its own certificate.
+{$SITE_DOMAIN} {
+	encode zstd gzip
+
+	# API, including webhooks, goes straight to Spring Boot.
+	handle /api/* {
+		reverse_proxy api:8080
+	}
+	handle /health {
+		reverse_proxy api:8080
+	}
+	# Everything else (storefront + /admin) is Next.js.
+	handle {
+		reverse_proxy web:3000
+	}
+
+	header {
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+		-Server
+	}
+}

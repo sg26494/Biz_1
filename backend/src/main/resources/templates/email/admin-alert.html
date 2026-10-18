@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"></head>
+<body style="margin:0;padding:24px;background:#f6f3ee;font-family:Arial,Helvetica,sans-serif;color:#2b2622;">
+<div style="max-width:560px;margin:0 auto;background:#ffffff;border-radius:8px;padding:28px;">
+<h2 style="margin-top:0;" th:text="${title}">Alert</h2>
+<pre style="white-space:pre-wrap;font-family:inherit;" th:text="${detail}"></pre>
+<p><a th:href="${siteUrl + '/admin'}">Open admin</a></p>
+<p style="margin-top:32px;font-size:12px;color:#8a817a;">Questions? Just reply to this email.<br>
+<a th:href="${siteUrl}" style="color:#8a4b2a;">Visit the store</a></p>
+</div></body></html>

@@ -1,0 +1,91 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: gradle
+      # Unit + integration tests (Testcontainers starts Postgres in Docker).
+      - run: ./gradlew --no-daemon build
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: backend-test-reports
+          path: backend/build/reports/tests
+          retention-days: 7
+
+  frontend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - run: npm ci --no-audit --no-fund
+      - run: npm run typecheck
+      - run: npm run build
+        env:
+          NEXT_TELEMETRY_DISABLED: '1'
+      - run: npm audit --omit=dev --audit-level=high
+
+  images:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: [backend, frontend]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build and push
+        run: |
+          OWNER=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
+          docker build -t ghcr.io/$OWNER/store-api:${{ github.sha }} backend
+          docker build -t ghcr.io/$OWNER/store-web:${{ github.sha }} \
+            --build-arg NEXT_PUBLIC_SITE_URL="${{ vars.SITE_URL }}" \
+            --build-arg NEXT_PUBLIC_SITE_NAME="${{ vars.SITE_NAME }}" \
+            --build-arg NEXT_PUBLIC_GOOGLE_CLIENT_ID="${{ vars.GOOGLE_CLIENT_ID }}" frontend
+          docker push ghcr.io/$OWNER/store-api:${{ github.sha }}
+          docker push ghcr.io/$OWNER/store-web:${{ github.sha }}
+
+  deploy-staging:
+    # Turn on by setting the repository variable DEPLOY_STAGING=true and the STAGING_* secrets.
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main' && vars.DEPLOY_STAGING == 'true'
+    needs: [images]
+    runs-on: ubuntu-latest
+    environment: staging
+    steps:
+      - uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.STAGING_HOST }}
+          username: ${{ secrets.STAGING_USER }}
+          key: ${{ secrets.STAGING_SSH_KEY }}
+          script: |
+            cd ~/store/deploy
+            echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+            IMAGE_TAG=${{ github.sha }} GH_OWNER=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]') ./deploy.sh

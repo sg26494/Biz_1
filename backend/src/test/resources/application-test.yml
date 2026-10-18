@@ -1,0 +1,12 @@
+app:
+  email:
+    provider: log
+    admin-alert-to: ops@example.com
+  security:
+    cookie-secure: false
+  razorpay:
+    key-id: rzp_test_key
+    key-secret: test_secret
+    webhook-secret: whsec_test
+  frontend:
+    revalidate-url: ""
