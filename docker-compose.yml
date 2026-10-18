@@ -1,6 +1,6 @@
 # Local development: Postgres, Mailpit (catches emails at http://localhost:8025), MinIO (S3-compatible
 # storage at http://localhost:9001), the API, the worker and the web app.
-#   docker compose up -d postgres mailpit minio minio-init   # then run api/web from your IDE, or:
+#   docker compose up -d postgres mailpit   # then run api/web from your IDE, or:
 #   docker compose up --build
 services:
   postgres:
@@ -20,7 +20,10 @@ services:
     image: axllent/mailpit:latest
     ports: ["1025:1025", "8025:8025"]
 
+  # Optional photo storage for local testing. MinIO no longer publishes free images on Docker Hub, so this
+  # is off by default; start it with `docker compose --profile photos up` once you pick an S3-compatible image.
   minio:
+    profiles: ["photos"]
     image: minio/minio:latest
     command: server /data --console-address ":9001"
     environment:
@@ -30,6 +33,7 @@ services:
     volumes: [miniodata:/data]
 
   minio-init:
+    profiles: ["photos"]
     image: minio/mc:latest
     depends_on: [minio]
     entrypoint: >
