@@ -1,0 +1,29 @@
+{
+  "_note": "Edit freely. Each entry joins two countries across water (bridge, tunnel, ferry route or a short sea hop). Route mode uses these when 'Sea links' is on. Format: [id, id, kind]. kind is 'bridge', 'strait' or 'hop'.",
+  "links": [
+    ["GBR", "FRA", "bridge"], ["DNK", "SWE", "bridge"], ["DNK", "NOR", "strait"], ["EST", "FIN", "strait"],
+    ["ISL", "GBR", "hop"], ["ISL", "NOR", "hop"], ["MLT", "ITA", "hop"], ["MLT", "TUN", "hop"],
+    ["ITA", "TUN", "hop"], ["ITA", "GRC", "strait"], ["ITA", "ALB", "strait"], ["ITA", "HRV", "strait"],
+    ["CYP", "TUR", "hop"], ["CYP", "SYR", "hop"], ["CYP", "LBN", "hop"],
+    ["JPN", "KOR", "strait"], ["JPN", "RUS", "strait"], ["JPN", "TWN", "hop"],
+    ["TWN", "CHN", "strait"], ["TWN", "PHL", "strait"], ["PHL", "MYS", "hop"], ["PHL", "IDN", "hop"],
+    ["SGP", "MYS", "bridge"], ["SGP", "IDN", "strait"],
+    ["LKA", "IND", "strait"], ["MDV", "IND", "hop"], ["MDV", "LKA", "hop"],
+    ["BHR", "SAU", "bridge"], ["BHR", "QAT", "strait"], ["OMN", "IRN", "strait"],
+    ["YEM", "DJI", "strait"], ["YEM", "ERI", "strait"], ["YEM", "SOM", "hop"], ["SAU", "EGY", "strait"],
+    ["AUS", "NZL", "hop"], ["AUS", "PNG", "strait"], ["AUS", "IDN", "hop"], ["AUS", "TLS", "hop"],
+    ["NZL", "FJI", "hop"], ["FJI", "VUT", "hop"], ["FJI", "TON", "hop"], ["FJI", "WSM", "hop"],
+    ["FJI", "TUV", "hop"], ["WSM", "TON", "hop"], ["VUT", "SLB", "hop"], ["SLB", "PNG", "hop"],
+    ["NRU", "KIR", "hop"], ["NRU", "MHL", "hop"], ["NRU", "SLB", "hop"], ["KIR", "TUV", "hop"],
+    ["KIR", "MHL", "hop"], ["MHL", "FSM", "hop"], ["FSM", "PLW", "hop"], ["FSM", "PNG", "hop"],
+    ["PLW", "PHL", "hop"], ["PLW", "IDN", "hop"],
+    ["USA", "CUB", "strait"], ["USA", "BHS", "hop"], ["USA", "RUS", "strait"],
+    ["CUB", "MEX", "strait"], ["CUB", "HTI", "strait"], ["CUB", "JAM", "strait"], ["CUB", "BHS", "hop"],
+    ["JAM", "HTI", "strait"],
+    ["KNA", "ATG", "hop"], ["ATG", "DMA", "hop"], ["DMA", "LCA", "hop"], ["LCA", "VCT", "hop"],
+    ["LCA", "BRB", "hop"], ["VCT", "BRB", "hop"], ["VCT", "GRD", "hop"], ["GRD", "TTO", "hop"], ["TTO", "VEN", "strait"],
+    ["COM", "MOZ", "hop"], ["COM", "MDG", "hop"], ["COM", "TZA", "hop"], ["MDG", "MOZ", "strait"],
+    ["MUS", "MDG", "hop"], ["SYC", "KEN", "hop"],
+    ["CPV", "SEN", "hop"], ["CPV", "MRT", "hop"], ["STP", "GAB", "hop"], ["STP", "GNQ", "hop"]
+  ]
+}

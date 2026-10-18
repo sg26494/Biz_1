@@ -1,0 +1,23 @@
+{
+  "name": "travle-trainer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "python3 scripts/serve.py",
+    "build:data": "node scripts/build-data.js",
+    "build:single": "node scripts/make-single.js",
+    "test": "node scripts/test-logic.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "country-flag-icons": "^1.6.20",
+    "d3": "^7.9.0",
+    "topojson-client": "^3.1.0",
+    "world-atlas": "^2.0.2",
+    "world-countries": "^5.1.0"
+  },
+  "private": true
+}

@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Travle Trainer</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="css/style.css?v=2">
+</head>
+<body>
+<div class="shell">
+  <header class="top">
+    <div class="brand"><span class="brand-mark" aria-hidden="true"></span><span class="brand-name">Travle Trainer</span><span class="brand-ver" title="App version">v2</span></div>
+    <nav class="tabs" id="tabs" aria-label="Practice mode"></nav>
+    <button class="icon-btn" id="themeBtn" type="button" aria-label="Switch light or dark theme">Theme</button>
+  </header>
+  <main class="app">
+    <section class="map-wrap" id="mapWrap" aria-label="World map">
+      <svg id="map" role="img" aria-label="Interactive world map"></svg>
+      <div class="map-ctl">
+        <button type="button" id="zin" aria-label="Zoom in">+</button>
+        <button type="button" id="zout" aria-label="Zoom out">&minus;</button>
+        <button type="button" id="zreset" class="wide">Reset view</button>
+        <label class="sr-only" for="colorSel">Map colours</label>
+        <select id="colorSel" title="Colour the map to help you remember">
+          <option value="plain">Colours: plain</option>
+          <option value="neighbour">Colours: by neighbour</option>
+          <option value="region">Colours: by region</option>
+          <option value="importance">Colours: route importance</option>
+          <option value="mastery">Colours: my progress</option>
+        </select>
+      </div>
+      <div class="tip" id="tip" hidden></div>
+      <div class="toast" id="toast" hidden role="status"></div>
+      <div class="legend" id="legend" hidden></div>
+    </section>
+    <aside class="panel" id="panel" aria-live="polite"></aside>
+  </main>
+</div>
+<script src="vendor/d3.min.js?v=2"></script>
+<script src="vendor/topojson-client.min.js?v=2"></script>
+<script src="js/logic.js?v=2"></script>
+<script src="js/app.js?v=2"></script>
+</body>
+</html>
